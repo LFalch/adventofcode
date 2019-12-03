@@ -32,6 +32,14 @@ fn work(vals: &mut [U]) {
     }
 }
 
+fn calc(noun: U, verb: U) -> U {
+    let mut v = read_file("day2.input").unwrap();
+    v[1] = noun;
+    v[2] = verb;
+
+    work(&mut v);
+    v[0]
+}
 
 fn main() {
     let mut v = read_file("day2.input").unwrap();
@@ -40,6 +48,15 @@ fn main() {
 
     work(&mut v);
 
-    println!("{:?}", v);
-}
+    println!("{}", v[0]);
 
+    for noun in 1..=99 {
+        for verb in 1..=99 {
+            if calc(noun, verb) == 19690720 {
+                eprintln!("noun={};verb={}", noun, verb);
+                println!("{}", 100 * noun + verb);
+                return;
+            }
+        }
+    }
+}
